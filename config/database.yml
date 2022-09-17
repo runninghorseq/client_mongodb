@@ -1,0 +1,30 @@
+common: &common
+  adapter: postgresql
+  encoding: utf8
+  database: ebdb
+  username: <%= ENV.fetch('DB_USERNAME', 'SET_DB_USERNAME') %>
+  password: <%= ENV.fetch('DB_PASSWORD', 'SET_DB_PASSWORD') %>
+  host: <%= ENV.fetch('DB_HOST', 'localhost') %>
+  port: 5432
+
+development:
+  <<: *common
+
+test:
+  adapter: postgresql
+  encoding: utf8
+  database: db_dialog_test
+  username: postgres
+  password:
+  host: <%= ENV.fetch('DB_HOST', 'localhost') %>
+  port: 5432
+
+qc:
+  <<: *common
+
+staging:
+  <<: *common
+  pool: 10
+
+new_production:
+  <<: *common
